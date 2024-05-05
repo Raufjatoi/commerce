@@ -6,45 +6,45 @@
    {% if message %}
       {% if update %}
       <div class="alert alert-sucess" role="alert">
-        {{ message }}
+        {{ message }} 🟩
       </div>
 
        {% else %}
 
        <div class="alert alert-dark" role="alert">
-        {{ message }}
+        {{ message }} 🔴
        </div>
        
 
        {% endif %}
-
     {% endif %}
-
  </div>
- {% if not listing.isActive and user == listing.price.user}
+
+ {% if not listing.isActive and user == listing.price.user %}
     <div class="alert alert-dark" role="alert">
          {{ message }}
-         you won the bid !
-      
- </div>
+         you won the bid 🎉!
+    </div>
  {% endif %}
+      
+ 
 
 
 <div class="row mx-3">
     {% if user.is_authenticated and listing.isActive %}
         {% if isOwner %}
-
           <form action="{% url 'closeBid' id=listing.id %}" method="POST" class="mx-3">
             {% csrf_token %}
             <button type="submit" class="btn-danger">close</button>
           </form>
-
-        {%  endif %}
+        {% endif %}
+        
         {% if isListingInWatchlist %}
             <form action="{% url 'removeWatchlist' id=listing.id %}" method="POST">
         {% else %}
             <form action="{% url 'addWatchlist' id=listing.id %}" method="POST">
         {% endif %}
+        
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">
             {% if isListingInWatchlist %}
@@ -72,9 +72,9 @@
         <input type="number" min="0" name="newBid" placeholder="Add a New Bid">
         <button type="submit" class="btn btn-warning">Add</button>
     </div>
+ </form>
 {% endif %}
 <p>{{ message }}</p>        
- </form>
 
 <h2>Comments</h2>
 <br>
@@ -87,7 +87,6 @@
         <button type="submit" class="btn btn-info">Add</button>
     </div>        
 </form>
-</div>
 {% endif %}
 <br>
 <ul class="list-group">
